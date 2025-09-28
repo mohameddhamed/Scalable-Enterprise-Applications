@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <!-- Entity classes -->
     <class>entities.Item</class>
+    <class>entities.Book</class>
     <properties>
       <!-- No logging info message is shown at the beginning of the program -->
       <property name="eclipselink.logging.level" value="WARNING" />

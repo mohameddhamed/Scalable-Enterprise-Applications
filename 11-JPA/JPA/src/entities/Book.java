@@ -1,8 +1,9 @@
-package main.jpa;
+package entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import main.jpa.StockStatus;
 
 import java.time.LocalDate;
 
@@ -58,10 +59,14 @@ public class Book {
         return id != null && id.equals(book.getId());
     }
 
-
     @Override
     public int hashCode() {
         return java.util.Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+       return "Book: " + id + " has Title: " + title + " and Author: " + author;
     }
 
 }
