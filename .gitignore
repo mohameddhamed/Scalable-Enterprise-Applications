@@ -1,0 +1,32 @@
+# IntelliJ / Eclipse
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+
+# Build output
+bin/
+out/
+target/
+build/
+
+# Logs
+*.log
+derby.log
+
+# Derby DB files (we only want schema scripts, not raw db files)
+*/testdb/
+*/seg0/
+*/log/
+*/tmp/
+*.dat
+*.lck
+service.properties
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
