@@ -5,6 +5,7 @@
     <!-- Entity classes -->
     <class>entities.Item</class>
     <class>entities.Book</class>
+    <class>entities.Author</class>
     <properties>
       <!-- No logging info message is shown at the beginning of the program -->
       <property name="eclipselink.logging.level" value="WARNING" />
@@ -31,7 +32,7 @@
       <property name="jakarta.persistence.jdbc.user" value="APP"/>
       <property name="jakarta.persistence.jdbc.password" value="APP"/>
       <!-- Create the tables when they are not exist -->
-      <property name="eclipselink.ddl-generation" value="create-tables"/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
       <!-- Generate and run the schema creation script -->
       <property name="eclipselink.ddl-generation.output-mode" value="both"/>
       <!-- Save it to create.sql in the current directory -->

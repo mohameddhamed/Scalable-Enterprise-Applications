@@ -1,8 +1,10 @@
 package main.jpa;
 
+import entities.Author;
 import entities.Book;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class BookStore {
@@ -38,6 +40,35 @@ public class BookStore {
         } finally {
             em.close();
         }
+    }
+
+    Author addAuthor(String name, LocalDate birthDate /* can be null */) {
+        Author author = new Author(name, birthDate);
+        return this.addAuthor(author);
+    }
+    Author addAuthor(Author author) {
+
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            EntityTransaction et = em.getTransaction();
+
+
+            et.begin();
+            em.persist(author);
+            et.commit();
+
+            return author;
+
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+
     }
 
     // Deletes the book with the given id (if it exists in the database).
@@ -86,6 +117,72 @@ public class BookStore {
                 em.getTransaction().rollback();
             }
             throw e;
+        } finally {
+            em.close();
+        }
+    }
+    // Adds a book with one author. It will be UNKNOWN in stock.
+    Book addBook(String title, Author author) {
+
+        EntityManager em = emf.createEntityManager();
+
+        try {
+
+            Book newBook = new Book(title, author.getName());
+            newBook.addAuthor(author);
+            em.persist(newBook);
+
+            return newBook;
+
+        } finally {
+            em.close();
+        }
+    }
+
+    // Associates a book with an author.
+    void assignAuthorToBook(Author author, Book book) {
+
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            EntityTransaction et = em.getTransaction();
+
+            et.begin();
+
+//            Book managedBook = em.merge(book);
+//            Author managedAuthor = em.merge(author);
+//
+//            managedBook.addAuthor(managedAuthor);
+            book.addAuthor(author);
+
+            et.commit();
+
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+
+    }
+
+    // Removes a book.
+    void removeBook(Book book) {
+
+        EntityManager em = emf.createEntityManager();
+
+        try {
+
+            EntityTransaction et = em.getTransaction();
+            et.begin();
+
+            book.removeAuthors();
+            em.persist(book);
+
+            et.commit();
+
         } finally {
             em.close();
         }

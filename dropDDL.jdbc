@@ -1,0 +1,10 @@
+ALTER TABLE books_authors DROP CONSTRAINT booksauthorsBookID
+ALTER TABLE books_authors DROP CONSTRAINT boksauthorsthorsID
+ALTER TABLE authors_books DROP CONSTRAINT uthorsbooksuthorID
+ALTER TABLE authors_books DROP CONSTRAINT uthorsbooksbooksID
+DROP TABLE ITEM
+DROP TABLE books
+DROP TABLE authors
+DROP TABLE books_authors
+DROP TABLE authors_books
+DELETE FROM SEQUENCE WHERE SEQ_NAME = 'SEQ_GEN'
